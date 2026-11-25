@@ -1,113 +1,98 @@
 # WriteWise Essay Coach
 
-WriteWise is a responsive English-writing practice site with a reusable Codex Skill. The site is a static HTML/CSS/JavaScript application and can be published directly with GitHub Pages.
+一个面向四六级、考研英语和雅思写作的英语作文练习工具，包含可直接使用的响应式网页，以及可复用的 Codex Skill。
 
-## Repository layout
+[在线体验](https://laishangen.github.io/writewise-essay-coach/) · [Codex Skill](.agents/skills/writewise-essay-coach) · [本地运行](#本地运行)
 
-```text
-writewise-essay-coach/
-├─ docs/                         # GitHub Pages site
-│  ├─ index.html
-│  ├─ styles.css
-│  ├─ app.js
-│  └─ .nojekyll
-├─ .agents/skills/
-│  └─ writewise-essay-coach/     # Shared Codex Skill
-│     ├─ SKILL.md
-│     ├─ agents/openai.yaml
-│     ├─ references/
-│     └─ assets/frontend-template/
-└─ README.md
-```
+![WriteWise 网页预览](docs/assets/writewise-preview.png)
 
-One repository is enough. The website and its Skill change together, so keeping them in one repository avoids synchronization problems.
+## 项目亮点
 
-## Run locally
+- 支持四级、六级、考研英语、IELTS Task 1 和 IELTS Task 2 五种独立写作标准。
+- 不同模式拥有独立的字数范围、评分维度、修改优先级、结构建议和润色策略。
+- 错误标注直接显示在可编辑作文中：红色表示语法/单词错误，橙色表示中式英语，蓝色表示标准优化项。
+- 点击高亮内容可查看修改原因，并直接在原文中应用修改。
+- 润色对比始终使用点击“检查作文”时保存的首版原文。
+- 可自动生成针对当前文章的评分、修改建议和提升建议，不截断唯一的语法问题。
+- 切换写作模式不会自动重新分析，必须由用户主动点击“检查作文”。
 
-From this directory:
+## 写作标准
 
-```powershell
-python -m http.server 4173 --directory docs
-```
+| 模式 | 篇幅 | 评分 |
+| --- | --- | --- |
+| 四级 CET-4 | 120–180 词 | 15 分制 |
+| 六级 CET-6 | 150–200 词 | 15 分制 |
+| 考研英语大作文 | 160–200 词 | 20 分制 |
+| IELTS Task 1 | 至少 150 词 | Band 1–9 |
+| IELTS Task 2 | 至少 250 词 | Band 1–9 |
 
-Open `http://127.0.0.1:4173/`.
+雅思两项任务均按四项标准评估：
 
-## Publish with GitHub Pages
+- Task 1：任务完成度、连贯与衔接、词汇资源、语法范围与准确性。
+- Task 2：任务回应、连贯与衔接、词汇资源、语法范围与准确性。
 
-### 1. Create the repository
+## 在线版本说明
 
-Create an **empty public repository** under your own GitHub account or organization. Do not ask the agent to create a separate GitHub identity. A Codex agent can commit and push to the repository only when local Git credentials or a GitHub CLI login are available.
+在线网页默认使用浏览器本地规则初筛，不会调用 AI 后端，也不会消耗网站所有者的模型 Token。
 
-Recommended repository name:
+本地规则不能完全替代模型对文章语义和上下文的深度理解。需要完整的 AI 逐句分析时，请使用仓库中的 Codex Skill。
 
-```text
-writewise-essay-coach
-```
+## 使用 Codex Skill
 
-### 2. Push this folder
-
-From this directory, run:
-
-```powershell
-git init -b main
-git add .
-git commit -m "Publish WriteWise website and Skill"
-git remote add origin https://github.com/YOUR_USERNAME/writewise-essay-coach.git
-git push -u origin main
-```
-
-Replace `YOUR_USERNAME` with the account that owns the repository.
-
-If you use GitHub CLI, first run `gh auth login`, then the same commands work.
-
-### 3. Enable GitHub Pages
-
-In the GitHub repository:
-
-1. Open **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch `main` and folder `/docs`.
-4. Save.
-
-The published URL will normally be:
-
-```text
-https://YOUR_USERNAME.github.io/writewise-essay-coach/
-```
-
-Deployment can take a few minutes. Every push to `main` updates the public site automatically.
-
-## Use the Skill
-
-If this repository is opened as a Codex project, the shared Skill is available at:
+Skill 位于：
 
 ```text
 .agents/skills/writewise-essay-coach
 ```
 
-To use it as a personal Skill on Windows, copy the folder into:
-
-```text
-%USERPROFILE%\.agents\skills\
-```
-
-Invoke it with:
+在 Codex 中调用：
 
 ```text
 $writewise-essay-coach
 ```
 
-## Important limitations
+也可以把该目录复制到个人 Skills 目录：
 
-- This release is a static site and uses the browser's local rule-based initial screening.
-- It does not publish an AI model or a server-side API.
-- Scores are practice estimates, not official exam results.
-- Never commit API keys. If a model backend is added later, keep it in a separate serverless or backend deployment and provide the key through server-side environment variables.
-- The default local mode stores drafts in the browser. If an external AI endpoint is connected, users must be told that essay text is sent to that service.
+```text
+%USERPROFILE%\.agents\skills\
+```
 
-## Updating the site
+使用 Skill 时，模型调用消耗的是使用者自己的 Codex 账户或 API 额度。
 
-Edit files in `docs/`, then run:
+## 本地运行
+
+```powershell
+python -m http.server 4173 --directory docs
+```
+
+打开：
+
+```text
+http://127.0.0.1:4173/
+```
+
+## 技术栈
+
+- HTML5
+- CSS3
+- 原生 JavaScript
+- Codex Skill
+- GitHub Pages
+
+## 仓库结构
+
+```text
+writewise-essay-coach/
+├─ docs/                         # 静态网站与预览截图
+├─ .agents/skills/
+│  └─ writewise-essay-coach/     # Codex Skill
+├─ README.md
+└─ .gitignore
+```
+
+## 更新网站
+
+网站由 `main` 分支的 `/docs` 目录发布。修改 `docs/` 后提交并推送：
 
 ```powershell
 git add docs
@@ -115,10 +100,11 @@ git commit -m "Update website"
 git push
 ```
 
-If the Skill changes as well:
+GitHub Pages 会自动更新。
 
-```powershell
-git add docs .agents/skills/writewise-essay-coach
-git commit -m "Update website and essay-coach Skill"
-git push
-```
+## 使用声明
+
+- 评分和修改建议仅用于英语写作练习参考，不代表官方考试成绩。
+- 在线静态版可能漏检需要深层语义判断的问题。
+- 请勿将本工具用于代写、抄袭或规避学校及考试规则。
+- 仓库中不包含 API Key；如未来接入外部 AI 服务，密钥必须保存在服务端环境变量中。
