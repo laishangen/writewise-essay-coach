@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="WriteWise AI 英语作文批改与润色工作台，帮助你把草稿变成更清晰、更自然的英文表达。"
+    />
+    <title>WriteWise · AI 英语作文批改</title>
+    <link rel="stylesheet" href="styles.css?v=20261126-3" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="icon-sparkles" viewBox="0 0 24 24">
+        <path d="M12 3.25c.36 0 .67.25.76.6l.68 2.55a5.7 5.7 0 0 0 4.06 4.06l2.55.68a.78.78 0 0 1 0 1.52l-2.55.68a5.7 5.7 0 0 0-4.06 4.06l-.68 2.55a.78.78 0 0 1-1.52 0l-.68-2.55a5.7 5.7 0 0 0-4.06-4.07l-2.55-.67a.78.78 0 0 1 0-1.52l2.55-.68A5.7 5.7 0 0 0 10.55 6.4l.68-2.55c.1-.35.41-.6.77-.6Z" />
+        <path d="M19.25 3v3.5M21 4.75h-3.5" />
+      </symbol>
+      <symbol id="icon-arrow-up-right" viewBox="0 0 24 24">
+        <path d="M7 17 17 7M8 7h9v9" />
+      </symbol>
+      <symbol id="icon-pen" viewBox="0 0 24 24">
+        <path d="m14.5 5.5 4 4M4 20l4.3-1 10.6-10.6a2.1 2.1 0 0 0 0-3l-.3-.3a2.1 2.1 0 0 0-3 0L5 15.7 4 20Z" />
+      </symbol>
+      <symbol id="icon-clipboard" viewBox="0 0 24 24">
+        <rect x="5" y="5" width="14" height="16" rx="2" />
+        <path d="M9 5V3.5h6V5M9 10h6M9 14h6M9 18h4" />
+      </symbol>
+      <symbol id="icon-trash" viewBox="0 0 24 24">
+        <path d="M4 7h16M9 3h6l1 4H8l1-4ZM7 7l1 14h8l1-14M10 11v6M14 11v6" />
+      </symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24">
+        <rect x="8" y="8" width="12" height="12" rx="2" />
+        <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12 4.2 4.2L19 6.5" />
+      </symbol>
+      <symbol id="icon-alert" viewBox="0 0 24 24">
+        <path d="M10.3 4.1 2.8 17a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3L13.7 4.1a2 2 0 0 0-3.4 0Z" />
+        <path d="M12 9v4M12 17.2v.1" />
+      </symbol>
+      <symbol id="icon-bulb" viewBox="0 0 24 24">
+        <path d="M9 18h6M10 21h4" />
+        <path d="M8.2 14.5A7 7 0 0 1 5 9a7 7 0 1 1 11.8 5.5c-1 .9-1.7 1.8-1.8 2.5H9c-.1-.7-.3-1.5-.8-2.5Z" />
+      </symbol>
+      <symbol id="icon-chevron" viewBox="0 0 24 24">
+        <path d="m8 10 4 4 4-4" />
+      </symbol>
+      <symbol id="icon-history" viewBox="0 0 24 24">
+        <path d="M3.5 12a8.5 8.5 0 1 0 2.2-5.7L3.5 8.5" />
+        <path d="M3.5 4.5v4h4M12 7.5V12l3 2" />
+      </symbol>
+    </svg>
+
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="WriteWise 首页">
+          <span class="brand-mark">
+            <span>W</span>
+            <svg viewBox="0 0 18 18" aria-hidden="true">
+              <path d="M13.8 2.2 15.8 4.2 6.2 13.8 3 14.8l1-3.2z" />
+            </svg>
+          </span>
+          <span class="brand-word">WriteWise</span>
+        </a>
+
+        <nav class="main-nav" aria-label="主导航">
+          <a class="active" href="#studio">写作台</a>
+          <a href="#report">批改报告</a>
+          <a href="#guide">评分指南</a>
+        </nav>
+
+        <div class="header-actions">
+          <span class="mode-pill">
+            <span class="status-dot"></span>
+            本地初筛
+          </span>
+          <button class="avatar-button" type="button" aria-label="打开个人菜单">
+            <span>YL</span>
+          </button>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <span class="eyebrow-line"></span>
+              AI-POWERED WRITING STUDIO
+            </p>
+            <h1 id="hero-title">
+              让每一次落笔，<br />
+              都更接近<span>高分。</span>
+            </h1>
+            <p class="hero-description">
+              从语法纠错到地道表达，像一位耐心的写作教练，
+              帮你把草稿变成清晰、自然、有说服力的英文文章。
+            </p>
+            <a class="text-link" href="#studio">
+              开始批改
+              <svg aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+            </a>
+          </div>
+
+          <div class="hero-visual" aria-label="写作能力提升示例">
+            <div class="hero-orbit hero-orbit-one"></div>
+            <div class="hero-orbit hero-orbit-two"></div>
+            <div class="paper-card paper-card-back">
+              <span>02</span>
+              <p>Clear ideas.<br />Stronger voice.</p>
+            </div>
+            <div class="paper-card paper-card-main">
+              <div class="paper-top">
+                <span class="paper-label">TODAY'S FOCUS</span>
+                <span class="paper-number">03</span>
+              </div>
+              <p class="paper-quote">“Good writing is clear thinking made visible.”</p>
+              <div class="paper-lines">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="paper-score">
+                <span>表达能力</span>
+                <strong>+18%</strong>
+              </div>
+            </div>
+            <span class="floating-badge floating-badge-top">
+              <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+              表达更自然
+            </span>
+            <span class="floating-badge floating-badge-bottom">
+              <span class="badge-check"><svg aria-hidden="true"><use href="#icon-check"></use></svg></span>
+              已发现 7 处提升点
+            </span>
+          </div>
+        </section>
+
+        <section class="studio" id="studio" aria-label="英语作文批改工作台">
+          <div class="studio-heading">
+            <div>
+              <p class="section-kicker">WRITING DESK</p>
+              <h2>你的写作工作台</h2>
+            </div>
+            <p class="studio-note">
+              <span class="live-dot"></span>
+              内容仅保存在当前浏览器
+            </p>
+          </div>
+
+          <div class="workspace">
+            <article class="editor-panel">
+              <header class="panel-header">
+                <div class="panel-title">
+                  <span class="panel-icon editor-icon">
+                    <svg aria-hidden="true"><use href="#icon-pen"></use></svg>
+                  </span>
+                  <div>
+                    <h3>作文草稿</h3>
+                    <p>输入或粘贴你的英文作文</p>
+                  </div>
+                </div>
+                <button class="icon-button" type="button" id="history-button" aria-label="查看批改历史" title="最近批改">
+                  <svg aria-hidden="true"><use href="#icon-history"></use></svg>
+                </button>
+              </header>
+
+              <div class="editor-toolbar">
+                <div class="level-picker" role="group" aria-label="选择作文类型">
+                  <button class="level-chip active" type="button" data-level="四级">四级</button>
+                  <button class="level-chip" type="button" data-level="六级">六级</button>
+                  <button class="level-chip" type="button" data-level="考研">考研</button>
+                  <button class="level-chip" type="button" data-level="雅思小作文">雅思小作文</button>
+                  <button class="level-chip" type="button" data-level="雅思大作文">雅思大作文</button>
+                </div>
+                <button class="sample-button" type="button" id="sample-button">
+                  <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+                  使用示例
+                </button>
+              </div>
+
+              <div class="standard-note" id="standard-note">
+                <div class="standard-note-head">
+                  <strong id="standard-name">四级 · CET-4</strong>
+                  <span id="standard-meta">120–180 词 · 15 分制</span>
+                </div>
+                <p id="standard-focus">重点看基础语法、常用词汇和清晰结构，表达准确比追求难词更重要。</p>
+              </div>
+
+              <div class="editor-paper">
+                <span class="sr-only" id="essay-label">输入英语作文</span>
+                <div
+                  id="essay-input"
+                  contenteditable="true"
+                  role="textbox"
+                  aria-multiline="true"
+                  aria-labelledby="essay-label"
+                  spellcheck="true"
+                  data-placeholder="Start writing here... Paste your English essay and let WriteWise help you refine it."
+                ></div>
+                <div class="paper-margin" aria-hidden="true"></div>
+              </div>
+
+              <div class="inline-correction" id="inline-correction" hidden>
+                <div class="inline-correction-copy">
+                  <span class="inline-correction-label" id="inline-correction-label">语法错误</span>
+                  <strong id="inline-correction-diff"></strong>
+                  <p id="inline-correction-reason"></p>
+                </div>
+                <div class="inline-correction-actions">
+                  <button type="button" id="apply-correction-button">采用修改</button>
+                  <button type="button" id="close-correction-button">暂不修改</button>
+                </div>
+              </div>
+              <div class="editor-annotation-legend annotation-legend" id="editor-annotation-legend" hidden>
+                <span><i class="legend-dot legend-grammar"></i>语法 / 单词错误</span>
+                <span><i class="legend-dot legend-chinglish"></i>中式英语</span>
+                <span><i class="legend-dot legend-improve"></i>可优化表达</span>
+                <span><i class="legend-dot legend-both"></i>语法 + 中式英语</span>
+              </div>
+
+              <div class="editor-footer">
+                <div class="editor-stats" aria-live="polite">
+                  <span><strong id="word-count">0</strong> words</span>
+                  <span class="stat-divider"></span>
+                  <span><strong id="char-count">0</strong> characters</span>
+                  <span class="saved-state" id="saved-state">示例已载入</span>
+                </div>
+                <div class="editor-tools">
+                  <button class="text-button" type="button" id="paste-button">
+                    <svg aria-hidden="true"><use href="#icon-clipboard"></use></svg>
+                    粘贴
+                  </button>
+                  <button class="text-button danger" type="button" id="clear-button">
+                    <svg aria-hidden="true"><use href="#icon-trash"></use></svg>
+                    清空
+                  </button>
+                </div>
+              </div>
+
+              <button class="correct-button" type="button" id="correct-button">
+                <span class="button-spark">
+                  <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+                </span>
+                <span id="correct-button-label">检查作文</span>
+                <span class="button-arrow">
+                  <svg aria-hidden="true"><use href="#icon-arrow-up-right"></use></svg>
+                </span>
+              </button>
+              <p class="keyboard-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> 快速提交</p>
+            </article>
+
+            <article class="report-panel" id="report">
+              <header class="report-header">
+                <div class="panel-title">
+                  <span class="panel-icon report-icon">
+                    <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+                  </span>
+                  <div>
+                    <div class="report-title-line">
+                      <h3>批改报告</h3>
+                      <span class="report-status">示例</span>
+                    </div>
+                    <p id="report-subtitle">基于当前草稿生成的即时反馈</p>
+                  </div>
+                </div>
+                <button class="export-button" type="button" id="copy-report-button" aria-label="复制润色后的作文">
+                  <svg aria-hidden="true"><use href="#icon-copy"></use></svg>
+                  <span>复制润色稿</span>
+                </button>
+              </header>
+
+              <div class="report-tabs" role="tablist" aria-label="批改报告内容">
+                <button class="report-tab active" type="button" role="tab" aria-selected="true" data-tab="overview">
+                  总览
+                </button>
+                <button class="report-tab" type="button" role="tab" aria-selected="false" data-tab="edits">
+                  修改
+                  <span id="edit-count-badge">7</span>
+                </button>
+                <button class="report-tab" type="button" role="tab" aria-selected="false" data-tab="compare">
+                  润色对比
+                </button>
+                <button class="report-tab" type="button" role="tab" aria-selected="false" data-tab="tips">
+                  提升建议
+                </button>
+              </div>
+
+              <div class="report-body" id="report-body" aria-live="polite"></div>
+
+              <div class="report-loading" id="report-loading" hidden>
+                <div class="loading-mark">
+                  <span></span><span></span><span></span>
+                </div>
+                <h4>正在阅读你的文章</h4>
+                <p id="loading-copy">分析语法与表达…</p>
+                <div class="loading-track"><span></span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <aside class="usage-notice" aria-labelledby="usage-notice-title">
+          <p class="section-kicker">USAGE NOTICE</p>
+          <h2 id="usage-notice-title">使用声明</h2>
+          <div class="usage-notice-grid">
+            <p>评分、等级和修改建议仅用于英语写作练习参考，不代表官方考试成绩。本地模式使用规则初筛，可能漏检需要深层语义判断的问题。</p>
+            <p>默认本地模式下，作文保存在当前浏览器；如接入外部 AI 服务，作文字段将发送到所配置的接口，请先确认该服务的数据与隐私条款。</p>
+            <p>请勿使用本工具代写、抄袭或规避学校及考试机构的规则。最终提交前，请自行复核事实、引用和语言表达。</p>
+          </div>
+        </aside>
+
+        <section class="guide-section" id="guide" aria-labelledby="guide-title">
+          <div class="guide-intro">
+            <p class="section-kicker">HOW IT WORKS</p>
+            <h2 id="guide-title">不止是找出错误，<br />更关注你想表达什么。</h2>
+          </div>
+          <div class="guide-steps">
+            <article>
+              <span>01</span>
+              <svg aria-hidden="true"><use href="#icon-pen"></use></svg>
+              <h3>写下你的想法</h3>
+              <p>支持四六级、考研和雅思大小作文，保留你的个人表达。</p>
+            </article>
+            <article>
+              <span>02</span>
+              <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+              <h3>获得细致反馈</h3>
+              <p>从语法、词汇、句式和逻辑四个维度发现问题。</p>
+            </article>
+            <article>
+              <span>03</span>
+              <svg aria-hidden="true"><use href="#icon-bulb"></use></svg>
+              <h3>带着方法前进</h3>
+              <p>看懂每一处修改的原因，把好表达变成自己的能力。</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <a class="brand footer-brand" href="#top">
+          <span class="brand-mark">
+            <span>W</span>
+            <svg viewBox="0 0 18 18" aria-hidden="true">
+              <path d="M13.8 2.2 15.8 4.2 6.2 13.8 3 14.8l1-3.2z" />
+            </svg>
+          </span>
+          <span class="brand-word">WriteWise</span>
+        </a>
+        <p>Write with clarity. Grow with every draft.</p>
+        <p class="footer-copy">© 2026 WriteWise Studio</p>
+      </footer>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js?v=20261126-3"></script>
+  </body>
+</html>

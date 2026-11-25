@@ -1,0 +1,5 @@
+interface:
+  display_name: "WriteWise 英语作文教练"
+  short_description: "按四级、六级、考研及雅思大小作文标准批改英语作文"
+  brand_color: "#173B2D"
+  default_prompt: "Use $writewise-essay-coach to grade my essay against the selected English exam standard and explain the key corrections."
