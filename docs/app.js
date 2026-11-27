@@ -1592,14 +1592,6 @@ However, some people are worried that students will depend on AI too much. Altho
   }
 
   els.essay.addEventListener("input", () => {
-    const selection = window.getSelection();
-    const anchor =
-      selection?.anchorNode?.nodeType === Node.ELEMENT_NODE
-        ? selection.anchorNode
-        : selection?.anchorNode?.parentElement;
-    const editedMark = anchor?.closest?.("mark[data-error-index]");
-    if (editedMark) editedMark.replaceWith(document.createTextNode(editedMark.textContent));
-
     hideInlineCorrection();
     updateCounts();
     resetReportAfterEdit();
